@@ -1,4 +1,4 @@
-# eureka information
+# eureka configuration
 eureka:
     client:
         service-url:
@@ -6,7 +6,7 @@ eureka:
     instance:
         prefer-ip-address: true
 
-# logging
+# logging configuration
 logging:
     level:
         org:
@@ -14,11 +14,34 @@ logging:
                 cloud:
                     gateway: TRACE
 
-
-
-# redis information
 spring:
-    redis:
-        database: 0
-        host: 192.168.22.65
-        port: 6379
+  cloud:
+  # gateway configuration
+    gateway:
+      routes:
+        - id: enterprise-data
+          uri: lb://enterprise-data
+          predicates:
+          - Path: /enterprise-data
+          filters:
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1
+              redis-rate-limiter.burstCapacity: 3
+              key-resolver: "#{@hostAddressKeyResolver}"
+        - id: enterprise-portrait
+          uri: lb://enterprise-portrait
+          predicates:
+          - Path: /enterprise-portrait
+          filters:
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 1
+              redis-rate-limiter.burstCapacity: 3
+              key-resolver: "#{@hostAddressKeyResolver}"
+
+  # redis configuration
+  redis:
+    database: 0
+    host: 192.168.22.65
+    port: 6379
