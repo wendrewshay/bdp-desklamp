@@ -12,36 +12,40 @@ logging:
         org:
             springframework:
                 cloud:
-                    gateway: TRACE
+                    gateway: debug
 
 spring:
+  # redis configuration
+  redis:
+    host: 192.168.61.129
+    port: 6379
   cloud:
   # gateway configuration
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: false
       routes:
         - id: enterprise-data
           uri: lb://enterprise-data
           predicates:
-          - Path: /enterprise-data
+            - Path=/enterprise-data/**
           filters:
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1
-              redis-rate-limiter.burstCapacity: 3
-              key-resolver: "#{@hostAddressKeyResolver}"
-        - id: enterprise-portrait
-          uri: lb://enterprise-portrait
-          predicates:
-          - Path: /enterprise-portrait
-          filters:
-          - name: RequestRateLimiter
-            args:
-              redis-rate-limiter.replenishRate: 1
-              redis-rate-limiter.burstCapacity: 3
-              key-resolver: "#{@hostAddressKeyResolver}"
-
-  # redis configuration
-  redis:
-    database: 0
-    host: 192.168.22.65
-    port: 6379
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+                key-resolver: "#{@remoteAddrKeyResolver}"
+#        - id: enterprise-portrait
+#          uri: lb://enterprise-portrait
+#          predicates:
+#            - Path=/enterprise-portrait/**
+#          filters:
+#            - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 3
+#                key-resolver: "#{@RemoteAddrKeyResolver}"
