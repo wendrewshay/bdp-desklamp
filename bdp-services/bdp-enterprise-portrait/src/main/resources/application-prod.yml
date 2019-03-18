@@ -1,0 +1,28 @@
+# eureka configuration
+eureka:
+    client:
+        service-url:
+            defaultZone: http://admin:123456@localhost:8761/eureka
+    instance:
+        prefer-ip-address: true
+
+# feign configuration
+feign:
+    compression:
+        request:
+            enabled: true
+            mime-types: text/html,application/xml,application/json
+            min-request-size: 2048
+        response:
+            enabled: true
+    hystrix:
+        enabled: false
+
+# logging configuration
+logging:
+    level:
+        com:
+            desklamp:
+                enterprise:
+                    portrait:
+                        clients: DEBUG

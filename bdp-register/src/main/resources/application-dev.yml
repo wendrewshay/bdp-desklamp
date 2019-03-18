@@ -1,0 +1,25 @@
+# eureka configuration
+eureka:
+    client:
+        fetch-registry: false
+        register-with-eureka: false
+        service-url:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/${server.servlet.context-path}/
+    instance:
+        hostname: localhost
+        instance-id: ${spring.application.name}:${server.port}
+
+# logging configuration
+logging:
+    level:
+        com:
+            netflix:
+                discovery: DEBUG
+                eureka: DEBUG
+
+# spring security configuration
+spring:
+    security:
+        user:
+            name: admin
+            password: 123456
