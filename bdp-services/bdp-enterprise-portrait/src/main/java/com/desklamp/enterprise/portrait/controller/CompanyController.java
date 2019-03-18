@@ -28,7 +28,7 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public CompanyInfo findById(@PathVariable Integer id) {
-        return this.restTemplate.getForObject("http://enterprise-data/enterprise-data/company/" + id, CompanyInfo.class);
+        return this.restTemplate.getForObject("http://enterprise-data/company/" + id, CompanyInfo.class);
     }
 
     @GetMapping("/log-instance")

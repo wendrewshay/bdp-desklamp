@@ -17,6 +17,6 @@ public interface CompanyClient {
      * @param id
      * @return
      */
-    @RequestLine("GET /enterprise-data/company/{id}")
+    @RequestLine("GET /company/{id}")
     CompanyInfo findById(@Param("id") Integer id);
 }
