@@ -45,7 +45,7 @@ public class GatewayConfiguration {
 
     @Bean
     public RedisRateLimiter redisRateLimiter() {
-        return new RedisRateLimiter(1, 1);
+        return new RedisRateLimiter(5, 20);
     }
 
     @Bean(name=RemoteAddrKeyResolver.BEAN_NAME)

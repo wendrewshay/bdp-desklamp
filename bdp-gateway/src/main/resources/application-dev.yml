@@ -17,27 +17,27 @@ logging:
 spring:
   # redis configuration
   redis:
-    host: 192.168.61.129
+    host: 192.168.22.65
     port: 6379
   cloud:
   # gateway configuration
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: false
-      routes:
-        - id: enterprise-data
-          uri: lb://enterprise-data
-          predicates:
-            - Path=/enterprise-data/**
-          filters:
-            - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
-                key-resolver: "#{@remoteAddrKeyResolver}"
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: false
+#      routes:
+#        - id: enterprise-data
+#          uri: lb://enterprise-data
+#          predicates:
+#            - Path=/enterprise-data/**
+#          filters:
+#            - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 1
+#                key-resolver: "#{@remoteAddrKeyResolver}"
 #        - id: enterprise-portrait
 #          uri: lb://enterprise-portrait
 #          predicates:
