@@ -6,7 +6,7 @@
         <groupId>com.desklamp</groupId>
         <artifactId>bdp-services</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from mapper -->
     </parent>
     <groupId>com.desklamp</groupId>
     <artifactId>bdp-enterprise-portrait</artifactId>

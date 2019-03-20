@@ -15,7 +15,7 @@ logging:
         com:
             netflix:
                 discovery: DEBUG
-                eureka: DEBUG
+                eureka: INFO
 
 # spring security configuration
 spring:

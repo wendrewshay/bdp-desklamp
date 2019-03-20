@@ -1,7 +1,7 @@
 package com.desklamp.enterprise.data.controller;
 
 import com.desklamp.enterprise.data.domain.CompanyInfo;
-import com.desklamp.enterprise.data.repository.CompanyRepository;
+import com.desklamp.enterprise.data.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private CompanyService companyService;
 
     @GetMapping("/{id}")
     public CompanyInfo findById(@PathVariable Integer id) {
-        CompanyInfo companyInfo = this.companyRepository.findById(id).get();
+        CompanyInfo companyInfo = this.companyService.queryById(id);
         return companyInfo;
     }
 }

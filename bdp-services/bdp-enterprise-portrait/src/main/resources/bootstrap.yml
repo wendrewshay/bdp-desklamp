@@ -1,10 +1,12 @@
 spring:
     application:
-        name: enterprise-portrait
+      name: enterprise-portrait
+    profiles:
+      active: dev
     cloud:
       # online config center configuration
       config:
-        profile: dev
+        profile: ${spring.profiles.active}
         label: master
         discovery:
           enabled: true

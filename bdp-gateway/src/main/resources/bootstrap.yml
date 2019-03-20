@@ -1,10 +1,12 @@
 spring:
     application:
-        name: bdp-gateway
+      name: bdp-gateway
+    profiles:
+      active: dev
     cloud:
       # online config center configuration
       config:
-        profile: dev
+        profile: ${spring.profiles.active}
         label: master
         discovery:
           enabled: true
