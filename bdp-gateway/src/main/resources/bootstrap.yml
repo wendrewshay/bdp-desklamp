@@ -1,0 +1,21 @@
+spring:
+    application:
+        name: bdp-gateway
+    cloud:
+      # online config center configuration
+      config:
+        profile: dev
+        label: master
+        discovery:
+          enabled: true
+          service-id: bdp-config
+        username: administrator
+        password: wql123456
+
+# eureka configuration
+eureka:
+    client:
+        service-url:
+            defaultZone: http://admin:123456@localhost:8761/eureka
+    instance:
+        prefer-ip-address: true

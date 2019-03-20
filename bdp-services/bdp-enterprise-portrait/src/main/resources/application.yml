@@ -2,8 +2,3 @@ server:
     port: 8082
     servlet:
         context-path: /
-spring:
-    application:
-        name: enterprise-portrait
-    profiles:
-        active: dev

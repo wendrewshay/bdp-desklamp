@@ -16,6 +16,7 @@
     <description>父工程</description>
 
     <modules>
+        <module>bdp-config</module>
         <module>bdp-gateway</module>
         <module>bdp-register</module>
         <module>bdp-services</module>
