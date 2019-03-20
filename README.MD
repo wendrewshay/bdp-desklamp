@@ -1,3 +1,6 @@
+> 先新建本地库sc，执行schema.sql
+
+
 >bdp-register
 * 注册与发现服务
 >bdp-config
