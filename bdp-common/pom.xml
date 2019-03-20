@@ -2,21 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
     <parent>
         <groupId>com.desklamp</groupId>
         <artifactId>bdp-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>bdp-services</artifactId>
+    <artifactId>bdp-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bdp-services</name>
-    <description>数据服务</description>
+    <name>bdp-common</name>
+    <description>公用工具类包</description>
 
-    <modules>
-        <module>bdp-enterprise-data</module>
-        <module>bdp-enterprise-portrait</module>
-    </modules>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
