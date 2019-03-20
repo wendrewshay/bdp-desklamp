@@ -1,31 +1,39 @@
-# eureka configuration
-eureka:
-    client:
-        service-url:
-            defaultZone: http://admin:123456@localhost:8761/eureka
-    instance:
-        prefer-ip-address: true
-
 # logging configuration
 logging:
-    level:
-        org:
-            hibernate: INFO
-            hibernate.type.descriptor.sql.BasicBinder: TRACE
-        root: INFO
+  level:
+    com.deskplamp.enterprise.data: DEBUG
+    com.deskplamp.enterprise.data.mapper: DEBUG
+    com.ibatis: DEBUG
+    com.ibatis.common.jdbc.SimpleDataSource: DEBUG
+    com.ibatis.common.jdbc.ScriptRunner: DEBUG
+    com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: DEBUG
+    tk.mybatis.springboot.mapper: DEBUG
 
-# datasource and jpa configuration
+# datasource configuration
 spring:
-    datasource:
-        platform: mysql
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/sc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-        username: root
-        password: 123456
-    jpa:
-        generate-ddl: false
-        show-sql: true
-        hibernate:
-            ddl-auto: none
-            naming:
-                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/sc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      initial-size: 10
+      min-idle: 10
+      max-active: 50
+      test-on-borrow: true
+
+mybatis:
+    type-aliases-package: com.desklamp.enterprise.data.domain
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+        - com.desklamp.enterprise.data.common.MyMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
