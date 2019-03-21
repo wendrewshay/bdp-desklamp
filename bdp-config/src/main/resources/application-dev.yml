@@ -1,8 +1,10 @@
 spring:
+  # Security configuration
   security:
     user:
       name: administrator
       password: wql123456
+  # Git configuration
   cloud:
     config:
       server:
@@ -24,5 +26,7 @@ logging:
   level:
     org.springframework.cloud: DEBUG
     org.springframework.boot: INFO
+
+
 
 
