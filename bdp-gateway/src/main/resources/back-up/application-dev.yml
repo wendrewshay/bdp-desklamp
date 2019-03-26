@@ -1,51 +1,29 @@
-# eureka configuration
-eureka:
-    client:
-        service-url:
-            defaultZone: http://admin:123456@localhost:8761/eureka
-    instance:
-        prefer-ip-address: true
-
-# logging configuration
+# 日志级别配置
 logging:
-    level:
-        org:
-            springframework:
-                cloud:
-                    gateway: debug
-
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix:
+            zuul: INFO
+# Redis配置
 spring:
-  # redis configuration
   redis:
     host: 192.168.22.65
     port: 6379
-  cloud:
-  # gateway configuration
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: false
-#      routes:
-#        - id: enterprise-data
-#          uri: lb://enterprise-data
-#          predicates:
-#            - Path=/enterprise-data/**
-#          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 1
-#                redis-rate-limiter.burstCapacity: 1
-#                key-resolver: "#{@remoteAddrKeyResolver}"
-#        - id: enterprise-portrait
-#          uri: lb://enterprise-portrait
-#          predicates:
-#            - Path=/enterprise-portrait/**
-#          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 1
-#                redis-rate-limiter.burstCapacity: 3
-#                key-resolver: "#{@RemoteAddrKeyResolver}"
+# 限流配置
+zuul:
+  ratelimit:
+    key-prefix: /
+    enabled: true
+    repository: redis
+    behind-proxy: true
+    add-response-headers: true
+    default-policy-list:
+      - limit: 5
+        quota: 1000
+        refresh-interval: 1
+        type:
+          - client
+          - origin
+          - url
