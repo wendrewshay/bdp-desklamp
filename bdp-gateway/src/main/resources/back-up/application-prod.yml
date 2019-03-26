@@ -11,6 +11,19 @@ spring:
   redis:
     host: 192.168.22.65
     port: 6379
+# 数据源配置
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/bdp-gateway?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      initial-size: 10
+      min-idle: 10
+      max-active: 50
+      test-on-borrow: true
+
+
 # 限流配置
 zuul:
   ratelimit:
@@ -24,6 +37,6 @@ zuul:
         quota: 1000
         refresh-interval: 1
         type:
-          - client
+          - user
           - origin
           - url
