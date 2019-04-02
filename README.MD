@@ -1,4 +1,4 @@
-https://github.com/996icu/996.ICU/blob/master/externals/instruction.md
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 > 先新建本地库sc，执行schema.sql
