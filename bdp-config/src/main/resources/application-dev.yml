@@ -10,8 +10,8 @@ spring:
       server:
         git:
           uri: http://192.168.22.65:8001/bdp-desklamp/bdp-config.git
-          username: Joney@ourqq.cn
-          password: joney123456
+          username: root
+          password: mypassword
           clone-on-start: true
 
 # eureka configuration
