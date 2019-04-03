@@ -1,5 +1,6 @@
 package com.desklamp.gateway.provider;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -60,7 +61,10 @@ public class GlobalFallbackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("服务不可用，请稍后再试！".getBytes(Charset.forName("UTF-8")));
+                JSONObject respObj = new JSONObject();
+                respObj.put("code", 503);
+                respObj.put("message", "服务不可用，请稍后再试");
+                return new ByteArrayInputStream(respObj.toJSONString().getBytes(Charset.forName("UTF-8")));
             }
 
             @Override
