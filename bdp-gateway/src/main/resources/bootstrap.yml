@@ -13,6 +13,11 @@ spring:
           service-id: bdp-config
         username: administrator
         password: wql123456
+    # jpa naming strategy
+    jpa:
+      hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 # eureka configuration
 eureka:

@@ -24,7 +24,10 @@ public class TokenAuthenticationHandler implements Serializable {
      * 加密密钥
      */
     private static final String DEFAULT_SECRET = "4Zbxk$qz9zmbqNLiYAiRSDu3ocP@1mzM";
-    private static final Long DEFAULT_EXPIRATION = 120L;
+    /**
+     * token有效时长1个小时
+     */
+    private static final Long DEFAULT_EXPIRATION = 3600L;
 
     private String secret = DEFAULT_SECRET;
 

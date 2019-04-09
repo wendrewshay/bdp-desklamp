@@ -46,4 +46,32 @@ public class DateUtils {
         calendar.setTimeInMillis(time);
         return new SimpleDateFormat(format).format(calendar.getTime());
     }
+
+    /**
+     * 获取当天0点
+     * @return Date
+     * @author by Joney on 2019/4/9 17:28
+     */
+    public static Date todayFirstDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取当天23点59分59秒
+     * @return Date
+     * @author by Joney on 2019/4/9 17:28
+     */
+    public static Date todayLastDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar.getTime();
+    }
 }

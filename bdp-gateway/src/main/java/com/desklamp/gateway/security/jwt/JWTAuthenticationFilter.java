@@ -37,22 +37,29 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
             if (!StringUtils.isEmpty(subjectStr)) {
                 JSONObject subject = JSONObject.parseObject(subjectStr);
                 JSONArray authorities = subject.getJSONArray("authorities");
+                String username = subject.getString("username");
                 // 判断是否包含权限
                 boolean hasPermission = false;
+                String serviceName = null;
                 if (!CollectionUtils.isEmpty(authorities)) {
                     for (Object authority : authorities) {
-                        if (requestURI.contains(((JSONObject)authority).getString("authority"))) {
+                        String authorityName = ((JSONObject) authority).getString("authority");
+                        if (requestURI.contains(authorityName)) {
                             hasPermission = true;
+                            serviceName = authorityName;
+                            break;
                         }
                     }
                 }
                 // 若包含权限就将认证token放入安全上下文中
                 if (hasPermission) {
+                    request.setAttribute("currentUser", username);
+                    request.setAttribute("serviceName", serviceName);
                     SecurityContextHolder.getContext().setAuthentication(new JWTAuthenticationToken(subjectStr));
                 }
             }
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(request, servletResponse);
     }
 }

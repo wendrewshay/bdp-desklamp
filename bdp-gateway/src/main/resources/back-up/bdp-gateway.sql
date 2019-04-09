@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
-Source Server Version : 50721
-Source Host           : localhost:3306
+Source Server         : 192.168.22.65
+Source Server Version : 50725
+Source Host           : 192.168.22.65:3307
 Source Database       : bdp-gateway
 
 Target Server Type    : MYSQL
-Target Server Version : 50721
+Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-26 22:11:00
+Date: 2019-04-09 19:16:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,13 +45,15 @@ CREATE TABLE `client_authority` (
   `authorityid` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限ID',
   `authorityName` varchar(50) DEFAULT NULL COMMENT '权限名称',
   PRIMARY KEY (`authorityid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='客户权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='客户权限表';
 
 -- ----------------------------
 -- Records of client_authority
 -- ----------------------------
 INSERT INTO `client_authority` VALUES ('1', '/enterprise-data');
 INSERT INTO `client_authority` VALUES ('2', '/enterprise-portrait');
+INSERT INTO `client_authority` VALUES ('3', '/ocr-api');
+INSERT INTO `client_authority` VALUES ('4', '/invoice-api');
 
 -- ----------------------------
 -- Table structure for client_relations
@@ -68,3 +70,25 @@ CREATE TABLE `client_relations` (
 -- ----------------------------
 INSERT INTO `client_relations` VALUES ('joney', '/enterprise-data');
 INSERT INTO `client_relations` VALUES ('joney', '/enterprise-portrait');
+INSERT INTO `client_relations` VALUES ('joney', '/ocr-api');
+INSERT INTO `client_relations` VALUES ('joney', '/invoice-api');
+
+-- ----------------------------
+-- Table structure for client_svc_invoke
+-- ----------------------------
+DROP TABLE IF EXISTS `client_svc_invoke`;
+CREATE TABLE `client_svc_invoke` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `serviceName` varchar(50) DEFAULT NULL COMMENT '服务名称',
+  `requestUri` varchar(200) DEFAULT NULL COMMENT '请求路径',
+  `clientUser` varchar(50) DEFAULT NULL COMMENT '用户',
+  `invokeCount` int(11) DEFAULT NULL COMMENT '调用次数',
+  `invokeTime` datetime DEFAULT NULL COMMENT '调用时间',
+  PRIMARY KEY (`id`),
+  KEY `C_IDX` (`serviceName`,`requestUri`,`clientUser`,`invokeTime`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='客户调用服务统计';
+
+-- ----------------------------
+-- Records of client_svc_invoke
+-- ----------------------------
+INSERT INTO `client_svc_invoke` VALUES ('4', '/enterprise-data', '/enterprise-data/company/1', 'joney', '68', '2019-04-09 19:09:32');
